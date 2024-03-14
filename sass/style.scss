@@ -1,0 +1,340 @@
+@charset "UTF-8";
+
+//** VARIABLES ================================= **//
+$light-green: #d5edeb;
+$green: #63dbd0;
+$brown: #403632;
+$light-grey: #eee;
+$white: #fff;
+$oswald-font: 'Oswald', sans-serif;
+
+/*
+Common class for setting width
+================================================ */
+.wrapper {
+    max-width: 38rem;
+    padding: 0 1rem;
+    margin: auto;
+}
+
+/*
+COMMON
+================================================ */
+* {
+    box-sizing: border-box; 
+}
+html { 
+    font-size: 100%; 
+}
+body {    
+    color: $brown;
+    background: url("../images/bg-shadow.jpg")
+    no-repeat
+    right bottom / cover fixed; 
+    text-align: center;
+}
+img { 
+    max-width: 100%; 
+    vertical-align: bottom; 
+}
+li { 
+    list-style: none; 
+}
+a { 
+    text-decoration: none; 
+}
+p {
+    line-height: 1.7;
+}
+.title {
+    font-family: $oswald-font;
+    font-size: min(10vw, 4rem);
+    margin-bottom: 2rem;
+}
+.btn {
+    display: inline-block;
+    color: $white;
+    background: $brown;
+    border: 1px solid $brown;
+    padding: 1rem;
+    margin: 2rem 0;
+    transition: .4s;
+}
+
+/*-------------------------------------------
+hero
+-------------------------------------------*/
+.hero {
+    height: 100vh;
+    position: relative;
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 50%;
+        height: 100vh;
+        background: 
+        url("../images/bg-hero.jpg")
+        no-repeat
+        center / cover;
+    }
+    h1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: max(12vw, 3rem);
+        line-height: 1.2;
+        z-index: 2;
+        width: 100%;
+    }
+}
+
+/*-------------------------------------------
+concept
+-------------------------------------------*/
+.concept {
+    margin: 8rem 0;
+    background-image: linear-gradient(
+        to right,
+        transparent 0%,
+        transparent 20%,
+        $light-grey 20%,
+        $light-grey 100%
+    );
+    p{
+        text-align: left;
+        margin-bottom: 2rem;
+    }
+}
+
+/*-------------------------------------------
+gallery
+-------------------------------------------*/
+.gallery {
+    display: flex;
+    flex-direction: column-reverse;
+    .gallery-image {
+        width: min(100%, calc(38rem - 2rem));
+        margin: auto;
+        position: relative;
+        &::after {
+            display: block;
+            content: "";
+            width: calc(100% - 2rem);
+            height: calc(100% - 2.5rem);
+            z-index: 3;
+            border: 3px solid $white;
+            top: 1rem;
+            left: 1rem;
+            position: absolute;
+
+        }
+        img {
+            aspect-ratio: 3/4;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .gallery-thumbnails {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(5, 1fr);
+        margin: 1rem 0;
+        img {
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            cursor: pointer;
+        }
+    }
+}
+
+/*-------------------------------------------
+shop
+-------------------------------------------*/
+.shop {
+    background: url("../images/bg-shop.jpg")
+    no-repeat
+    center top / cover;
+    height: 40rem;
+    margin-top: 16rem;
+    position: relative;
+    .shop-content {
+        background: $white;
+        padding: 3rem;
+        position: absolute;
+        top: -8rem;
+        left: 0;
+        right: 0;
+        width: 90vw;
+    }
+    h3 {
+      font-weight: normal;
+      padding-top: 2rem;
+      margin: 1rem 0;  
+      border-top: 1px solid $light-grey;
+    }
+}
+
+/* レスポンシブ
+------------------------------- */
+@media screen and (min-width: 800px) {
+/* COMMON */
+    .title {
+        margin-bottom: 3rem;
+    }
+    .btn:hover {
+        color: $brown;
+        background-color: $light-green;
+    }
+
+/* CONCEPT */
+    .concept {
+        display: flex;
+        margin: 16rem 0;
+        p {
+            text-align-last: left;
+        }
+        img {
+            margin: -6rem 0;
+            max-width: 38rem;
+        }
+    }
+
+/* gallery */    
+    .gallery {
+        flex-direction: row;
+        .gallery-image {
+            width: 50vw;
+            margin: 0;
+            img {
+                height: 100vh;
+            }
+        }
+
+        .gallery-content {
+            width: 30%;
+
+            .gallery-thumbnails {
+                gap: 2vw;
+                grid-template-columns: repeat(3, 1fr);
+                img:hover {
+                    box-shadow: 0 0 1rem rgba(0, 0, 0, .4);
+                    transition: .4s;
+                }
+            }
+        }
+    }
+
+/* SHOP */
+    .shop {
+        height: 50rem;
+        margin-top: 20rem;
+    }
+}
+
+/*
+loading画面
+================================================ */
+#loading {
+    background-color: $light-grey;
+    position: fixed;
+    z-index: 999;
+    display: grid;
+    place-items: center;
+    inset: 0;
+    #loading-screen {
+        background: $light-green;
+        position: fixed;
+        inset: 0;
+        z-index: 998;
+        translate: 0 100vh;
+    }
+    p {
+        font-size: 2rem;
+        font-family: $oswald-font;
+        z-index: 999;
+    }
+}
+
+/*
+スライドメニュー
+================================================ */
+/* 開閉ボタン */
+.btn-menu {
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    z-index: 4;
+    padding: .5rem 1rem;
+    border: 1px solid $brown;
+    border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+    transition: 0.5s;
+
+    &:hover {
+        background-color: $light-green;
+    }
+
+    svg {
+        fill: $brown;
+        margin-top: .25rem;
+        height: 2rem;
+        width: 2rem;
+    }
+}
+
+/* 閉じるボタン */
+#menu-close {
+    border: 1px solid $light-green;
+
+    &:hover {
+        background-color: $light-green;
+
+        svg {
+            fill: $brown;
+        }
+    }
+    svg {
+        fill: $light-green;
+    }
+
+
+}
+
+/* スライドメニューパネル */
+#menu-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 4;
+    padding: 8rem 2rem 2rem;
+    width: max(32vw, 20rem);
+    box-shadow: 0 0 2rem $brown;
+    height: 100vh;
+    background-color: $brown;
+    font-family: $oswald-font;
+    translate: 100vw;/* ビューポートの幅の100%分移動 */
+
+
+
+    .menu-list {
+        
+        li {
+            margin: 1.5rem 0;
+            opacity: 0;            
+        }
+        a {
+            color: $light-green;
+            font-size: 2rem;
+            transition: all .5s;
+
+            &:hover {
+                color: $green;
+            }
+        }
+    }
+}
